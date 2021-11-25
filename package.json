@@ -1,0 +1,26 @@
+{
+  "name": "assignment9---ex2-express-mongo-heroku-oferelfassi",
+  "version": "1.0.0",
+  "description": "Flights managment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DCS-Shenkar-2022/assignment9---ex2-express-mongo-heroku-OferElfassi.git"
+  },
+  "author": "Ofer Elfassi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DCS-Shenkar-2022/assignment9---ex2-express-mongo-heroku-OferElfassi/issues"
+  },
+  "homepage": "https://github.com/DCS-Shenkar-2022/assignment9---ex2-express-mongo-heroku-OferElfassi#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
