@@ -1,7 +1,15 @@
 const express = require("express");
+const authRoutes = require("./routes/auth-routes");
+const flightRoutes = require("./routes/flight-routes");
+
 const port = process.env.PORT || 5000;
 
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/auth", authRoutes);
+app.use("/api/flights", flightRoutes);
+
+app.listen(port, () => console.log(`server listening on port ${port}`));
