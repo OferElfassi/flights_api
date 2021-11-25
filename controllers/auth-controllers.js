@@ -1,6 +1,6 @@
 const keyGenerator = require("../util/key-generator");
 
-const getAuthKey = async (req, res, next) => {
+exports.getAuthKey = async (req, res, next) => {
   try {
     const apiKey = keyGenerator(6, "A#");
     res
@@ -12,4 +12,3 @@ const getAuthKey = async (req, res, next) => {
   } catch (e) {}
 };
 
-exports = { getAuthKey };
