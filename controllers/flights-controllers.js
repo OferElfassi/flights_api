@@ -1,24 +1,24 @@
-const getFlights = async (req, res, nex) => {
+const getFlights = async (req, res, next) => {
   try {
   } catch (e) {}
 };
 
-const getFlight = async (req, res, nex) => {
+const getFlight = async (req, res, next) => {
   try {
   } catch (e) {}
 };
 
-const addFlight = async (req, res, nex) => {
+const addFlight = async (req, res, next) => {
   try {
   } catch (e) {}
 };
 
-const updateFlight = async (req, res, nex) => {
+const updateFlight = async (req, res, next) => {
   try {
   } catch (e) {}
 };
 
-const deleteFlight = async (req, res, nex) => {
+const deleteFlight = async (req, res, next) => {
   try {
   } catch (e) {}
 };

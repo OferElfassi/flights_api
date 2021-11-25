@@ -2,7 +2,7 @@ const express = require("express");
 const authRoutes = require("./routes/auth-routes");
 const flightRoutes = require("./routes/flight-routes");
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 const app = express();
 
