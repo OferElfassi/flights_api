@@ -5,7 +5,7 @@ const UserSchema = new Schema({
   pid: {
     unique: true,
     type: String,
-    required: [true, "personal id is required."],
+    required: [true, "Personal id is required."],
   },
   apiKey: keySchema,
 });

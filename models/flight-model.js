@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const FlightSchema = new Schema({
   destination: {
     type: String,
-    required: [true, "destination is required."],
+    required: [true, "Destination is required."],
     default: "",
   },
   date: {
