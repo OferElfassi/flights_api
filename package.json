@@ -20,7 +20,8 @@
   "homepage": "https://github.com/DCS-Shenkar-2022/assignment9---ex2-express-mongo-heroku-OferElfassi#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^6.0.13"
+    "mongoose": "^6.0.13",
+    "faker": "^5.5.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

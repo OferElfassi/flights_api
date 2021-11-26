@@ -3,6 +3,7 @@ const authRoutes = require("./routes/auth-routes");
 const flightRoutes = require("./routes/flight-routes");
 const mongoose = require("mongoose");
 const HttpError = require('./util/http-error')
+const fakeDataGenerator = require('./util/fakeDataGenerator')
 
 const port = process.env.PORT || 3000;
 
@@ -17,7 +18,6 @@ app.use("/api/flights", flightRoutes);
 app.use((req, res, next) => {
     throw new HttpError('Could not find this route.', 404);
 });
-
 app.use((error, req, res, next) => {
     if (res.headerSent) {
         return next(error);
@@ -27,5 +27,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose.connect('mongodb://localhost/flights').then(()=>{
-    app.listen(port, () => console.log(`server listening on port ${port}`));
+    fakeDataGenerator.fakeFlights(20).then(()=>{
+        app.listen(port, () => console.log(`server listening on port ${port}`));
+    })
 })
