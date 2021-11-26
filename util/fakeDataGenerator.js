@@ -8,7 +8,7 @@ exports.fakeFlights = async (count)=>{
     }
     for (let i = 0; i<count;i++){
         const flight = new Flight({
-          destination: faker.address.city(),
+          destination: faker.address.cityName(),
           date: faker.date.future(),
         });
         await flight.save();
