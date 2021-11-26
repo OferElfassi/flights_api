@@ -1,6 +1,7 @@
 const express = require("express");
 const authRoutes = require("./routes/auth-routes");
 const flightRoutes = require("./routes/flight-routes");
+const mongoose = require("mongoose");
 
 const port = process.env.PORT || 3000;
 
@@ -12,4 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/flights", flightRoutes);
 
-app.listen(port, () => console.log(`server listening on port ${port}`));
+mongoose.connect('mongodb://localhost/flights').then(()=>{
+    app.listen(port, () => console.log(`server listening on port ${port}`));
+})

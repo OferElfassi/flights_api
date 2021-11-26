@@ -1,19 +1,13 @@
 const mongoose = require("mongoose");
+const keySchema = require("./key-schema");
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   pid: {
+    unique: true,
     type: String,
     required: [true, "personal id is required."],
   },
-  apiKey: { type: String, default: "" },
-  expiryDate: { type: Number, default: 0 },
-});
-
-UserSchema.virtual("keyInfo").get(function () {
-  const key = this.apiKey;
-  const isValid = ((this.expiryDate!==0) && (new Date(this.expiryDate) <= new Date()));
-  const remainingMinutes = 6;
-  return { isValid, remainingMinutes,key };
+  apiKey: keySchema,
 });
 
 const User = mongoose.model("user", UserSchema);
