@@ -3,7 +3,6 @@ const axios = require("axios");
 const Flight = require("../models/flight-model");
 const HttpError = require("../util/http-error");
 const weatherApi = require("../util/weatherApi");
-const faker = require("faker");
 const getFlights = async (req, res, next) => {
   try {
     const flights = await Flight.find({});

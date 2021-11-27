@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/", flightsControllers.getFlights);
 router.get("/:flightId", flightsControllers.getFlight);
 router.post("/", flightsControllers.addFlight);
-router.put("/flightId", flightsControllers.updateFlight);
-router.delete("/flightId", flightsControllers.deleteFlight);
+router.put("/:flightId", flightsControllers.updateFlight);
+router.delete("/:flightId", flightsControllers.deleteFlight);
 
 module.exports = router;
