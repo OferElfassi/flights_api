@@ -1,11 +1,12 @@
 const express = require("express");
 const flightsControllers = require("../controllers/flights-controllers");
 const router = express.Router();
+const isAuth = require("../middleware/is_auth");
 
-router.get("/", flightsControllers.getFlights);
-router.get("/:flightId", flightsControllers.getFlight);
-router.post("/", flightsControllers.addFlight);
-router.put("/:flightId", flightsControllers.updateFlight);
-router.delete("/:flightId", flightsControllers.deleteFlight);
+router.get("/", isAuth, flightsControllers.getFlights);
+router.get("/:flightId", isAuth, flightsControllers.getFlight);
+router.post("/", isAuth, flightsControllers.addFlight);
+router.put("/:flightId", isAuth, flightsControllers.updateFlight);
+router.delete("/:flightId", isAuth, flightsControllers.deleteFlight);
 
 module.exports = router;

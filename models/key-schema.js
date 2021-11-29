@@ -10,9 +10,9 @@ const KeySchema = new Schema({
 KeySchema.virtual("keyInfo").get(function () {
   const apiKey = this.key;
   const isValid =
-    this.expiryDate !== 0 && new Date(this.expiryDate) <= new Date();
+    this.expiryDate !== 0 && new Date(this.expiryDate) >= new Date();
   const remainingMinutes = 6;
-  return { isValid, remainingMinutes, apiKey };
+  return { isValid, remainingMinutes, apiKey};
 });
 
 module.exports = KeySchema;

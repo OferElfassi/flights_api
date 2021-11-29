@@ -1,5 +1,3 @@
-//https://api.openweathermap.org/data/2.5/weather?q=new%20york&units=metric&appid=2216d706dc30557bf642099e84018009
-const axios = require("axios");
 const Flight = require("../models/flight-model");
 const HttpError = require("../util/http-error");
 const weatherApi = require("../util/weatherApi");
@@ -14,11 +12,12 @@ const getFlights = async (req, res, next) => {
   }
 };
 
+
+const apiKey = "2216d706dc30557bf642099e84018009";
 const getFlight = async (req, res, next) => {
   try {
     const flight = await Flight.findById(req.params.flightId);
     if (!flight) throw new HttpError("Can't find this flight.", 404);
-    const apiKey = "2216d706dc30557bf642099e84018009";
     const weather = await weatherApi.getWeather(flight.destination, apiKey);
     const responseData = {
       dest: flight.destination,
