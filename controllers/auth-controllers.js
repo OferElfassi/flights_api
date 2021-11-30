@@ -20,7 +20,7 @@ const getAuthKey = async (req, res, next) => {
     };
     await user.save();
 
-    res.status(200).json({
+    res.status(201).json({
       message: "new key created successfully",
       data: { userId: req.params.userId, apiKey },
     });
@@ -32,7 +32,7 @@ const getAuthInfo = async (req, res, next) => {
   try {
     let user = await User.findOne({ "apiKey.key": req.get("Authorization") })
     if (!user) {
-      throw new HttpError("cant find user", 404);
+      throw new HttpError("Can't find this key, try to generate new one", 404);
     }
     res.status(200).json({
       message: "Key data calculated successfully ",

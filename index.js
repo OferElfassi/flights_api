@@ -2,7 +2,6 @@ const express = require("express");
 const authRoutes = require("./routes/auth-routes");
 const flightRoutes = require("./routes/flight-routes");
 const mongoose = require("mongoose");
-const HttpError = require("./util/http-error");
 const fakeDataGenerator = require("./util/fakeDataGenerator");
 const keys = require('./config/keys');
 const errorMiddleware = require('./middleware/error-middleware')
@@ -34,7 +33,3 @@ app.listen(port, () => {
     console.log("Something went wrong",e)
   });
 });
-
-
-
-// mongoose.connect("mongodb+srv://ofer_dcs:XR4Tnj.mDckjnKr@cluster0.o1xmm.mongodb.net/flights?retryWrites=true&w=majority").then(() => {

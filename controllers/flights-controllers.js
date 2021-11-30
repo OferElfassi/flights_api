@@ -1,27 +1,26 @@
 const Flight = require("../models/flight-model");
 const HttpError = require("../util/http-error");
 const weatherApi = require("../util/weatherApi");
+const keys = require('../config/keys')
+
 const getFlights = async (req, res, next) => {
   try {
-    const flights = await Flight.find({});
-    res
-      .status(200)
+    const flights = await Flight.find({}).select('-__v');
+    res.status(200)
       .json({ message: "Flights found successfully.", data: flights });
   } catch (e) {
     next(e);
   }
 };
 
-
-const apiKey = "2216d706dc30557bf642099e84018009";
 const getFlight = async (req, res, next) => {
   try {
     const flight = await Flight.findById(req.params.flightId);
     if (!flight) throw new HttpError("Can't find this flight.", 404);
-    const weather = await weatherApi.getWeather(flight.destination, apiKey);
+    const weather = await weatherApi.getWeather(flight.destination, keys.WEATHER_API_KEY);
     const responseData = {
       dest: flight.destination,
-      time: flight.date,
+      date: flight.date,
       weather: weather || "Can't get weather at destination",
     };
     res.status(200);
@@ -30,30 +29,21 @@ const getFlight = async (req, res, next) => {
     next(e);
   }
 };
-const isDate =(value) =>{
-  var dateFormat;
-  if (toString.call(value) === '[object Date]') {
-    return true;
-  }
-  if (typeof value.replace === 'function') {
-    value.replace(/^\s+|\s+$/gm, '');
-  }
-  dateFormat = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d\s*[ap]m)?$/;
-  return dateFormat.test(value);
-}
+
 const addFlight = async (req, res, next) => {
   try {
     if (!req.body.destination || !req.body.date)
       throw new HttpError(`missing flight parameters`, 422);
-
-    console.log(isDate(req.body.date)?"date":"no date")
-    const flight = new Flight({
-      destination: req.body.destination,
-      date: req.body.date,
-    });
+    const {destination,date} = req.body
+    const isDup = await Flight.findOne({destination, date});
+    if (isDup) throw new HttpError(`Flight with the same destination and date already exist.`, 404);
+    const flight = new Flight({destination, date});
     await flight.save();
-    res.status(200);
-    res.json({ message: "New flight added successfully.", data: flight });
+    res.status(201);
+    res.json({
+      message: "New flight added successfully.",
+      data: (({ destination, date, _id }) => ({ destination, date, id:_id }))(flight),
+    });
   } catch (e) {
     next(e);
   }
@@ -68,7 +58,8 @@ const updateFlight = async (req, res, next) => {
     flight.date = req.body.date || flight.date;
     await flight.save();
     res.status(200);
-    res.json({ message: "Flight updated successfully.", data: flight });
+    res.json({ message: "Flight updated successfully.",
+      data:  (({ destination, date, _id }) => ({ destination, date, id:_id }))(flight) });
   } catch (e) {
     next(e);
   }
