@@ -11,8 +11,10 @@ KeySchema.virtual("keyInfo").get(function () {
   const apiKey = this.key;
   const isValid =
     this.expiryDate !== 0 && new Date(this.expiryDate) >= new Date();
-  const remainingMinutes = 6;
-  return { isValid, remainingMinutes, apiKey};
+  const remainingMinutes = isValid
+    ? ((new Date(this.expiryDate) - new Date()) / 1000 / 60).toFixed(1)
+    : 0;
+  return { isValid, remainingMinutes, apiKey };
 });
 
 module.exports = KeySchema;

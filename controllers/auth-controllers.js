@@ -28,5 +28,19 @@ const getAuthKey = async (req, res, next) => {
     next(e);
   }
 };
+const getAuthInfo = async (req, res, next) => {
+  try {
+    let user = await User.findOne({ "apiKey.key": req.get("Authorization") })
+    if (!user) {
+      throw new HttpError("cant find user", 404);
+    }
+    res.status(200).json({
+      message: "Key data calculated successfully ",
+      data: { userId: user.pid, ...user.apiKey.keyInfo },
+    });
+  } catch (e) {
+    next(e);
+  }
+};
 
-module.exports = { getAuthKey };
+module.exports = { getAuthKey,getAuthInfo };

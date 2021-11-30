@@ -30,11 +30,23 @@ const getFlight = async (req, res, next) => {
     next(e);
   }
 };
-
+const isDate =(value) =>{
+  var dateFormat;
+  if (toString.call(value) === '[object Date]') {
+    return true;
+  }
+  if (typeof value.replace === 'function') {
+    value.replace(/^\s+|\s+$/gm, '');
+  }
+  dateFormat = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d\s*[ap]m)?$/;
+  return dateFormat.test(value);
+}
 const addFlight = async (req, res, next) => {
   try {
     if (!req.body.destination || !req.body.date)
       throw new HttpError(`missing flight parameters`, 422);
+
+    console.log(isDate(req.body.date)?"date":"no date")
     const flight = new Flight({
       destination: req.body.destination,
       date: req.body.date,

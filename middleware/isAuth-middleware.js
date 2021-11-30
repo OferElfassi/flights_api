@@ -6,7 +6,6 @@ module.exports = (req, res, next) => {
   if (!authHeader) throw new HttpError("Not authenticated.", 401);
   User.findOne({ "apiKey.key": authHeader })
     .then((user) => {
-      console.log(user.apiKey.keyInfo);
       if (!user.apiKey.keyInfo.isValid)
         throw new HttpError("Not authenticated.", 401);
       next();
