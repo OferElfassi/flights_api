@@ -7,7 +7,7 @@ const keys = require('./config/keys');
 const errorMiddleware = require('./middleware/error-middleware')
 const unKnownRouteMiddleware = require('./middleware/unknownRoute-middleware')
 
-const DB_CONNECTION_STRING = process.env.NODE_ENV !== 'production' ?
+const DB_CONNECTION_STRING = process.env.NODE_ENV === 'production' ?
     `mongodb+srv://${keys.DB_USER}:${keys.DB_PASS}@${keys.DB_HOST}/${keys.DB_NAME}?retryWrites=true&w=majority`:
     `mongodb://${keys.DB_HOST}/${keys.DB_NAME}`
 
