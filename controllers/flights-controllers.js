@@ -83,7 +83,7 @@ const deleteFlight = async (req, res, next) => {
     }
     await flight.remove();
     res.status(200);
-    res.json({ message: "Flight deleted successfully.", data: flight });
+    res.json({ message: "Flight deleted successfully.", data: null });
   } catch (e) {
     next(e);
   }
