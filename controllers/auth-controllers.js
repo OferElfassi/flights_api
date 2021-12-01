@@ -30,7 +30,7 @@ const getAuthKey = async (req, res, next) => {
 };
 const getAuthInfo = async (req, res, next) => {
   try {
-    let user = await User.findOne({ "apiKey.key": req.get("Authorization") })
+    let user = await User.findOne({ "apiKey.key": req.get("Authorization") });
     if (!user) {
       throw new HttpError("Can't find this key, try to generate new one", 404);
     }
@@ -43,4 +43,4 @@ const getAuthInfo = async (req, res, next) => {
   }
 };
 
-module.exports = { getAuthKey,getAuthInfo };
+module.exports = { getAuthKey, getAuthInfo };

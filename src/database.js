@@ -15,9 +15,9 @@ mongoose.connect(DB_HOST, options);
 mongoose.connection.on("connected", () => {
   console.log("Database connected");
   dataGenerator.fakeFlights(20)
-      .catch(e=>console.log("Fake data creation failed",e))
+    .catch((e) => console.log("Fake data creation failed", e));
 });
 
 mongoose.connection.on("error", (err) => {
-  console.log('Database connection error',err);
+  console.log("Database connection error", err);
 });

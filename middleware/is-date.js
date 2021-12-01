@@ -24,14 +24,11 @@ module.exports = (req, res, next) => {
   if (req.body && req.body.date) {
     const date = req.body.date;
     if (moment(date, formats, true).isValid()) {
-      req.body.date = moment(moment(date,formats)).format('MM-DD-YYYY');
+      req.body.date = moment(moment(date, formats)).format("MM-DD-YYYY");
       return next();
     } else {
-      throw new HttpError(
-        "Wrong date format, should be on of the following:",
-        400
-      );
+      throw new HttpError("Wrong date format, should be on of the following:", 400);
     }
   }
-  return  next(); // missing date handled in controller
+  return next(); // missing date handled in controller
 };

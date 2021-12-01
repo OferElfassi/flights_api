@@ -1,4 +1,5 @@
 const HttpError = require("../util/http-error");
+
 module.exports = (req, res, next) => {
-    throw new HttpError("Could not find this route.", 404);
+  throw new HttpError("Could not find this route.", 404);
 };
