@@ -1,7 +1,7 @@
 {
   "name": "assignment9---ex2-express-mongo-heroku-oferelfassi",
   "version": "1.0.0",
-  "description": "Flights managment",
+  "description": "Flights management api",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
