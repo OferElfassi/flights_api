@@ -11,7 +11,7 @@ const options = {
 };
 
 mongoose.connect(DB_HOST, options);
-
+console.log(DB_HOST)
 mongoose.connection.on("connected", () => {
   console.log("Database connected");
   dataGenerator.fakeFlights(20)

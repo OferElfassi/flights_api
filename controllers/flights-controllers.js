@@ -61,6 +61,9 @@ const updateFlight = async (req, res, next) => {
       throw new HttpError(`missing flight parameters`, 422);
     }
     const flight = await Flight.findById(req.params.flightId);
+    if(!flight){
+      throw new HttpError(`Can't find this flight`, 404);
+    }
     flight.destination = req.body.destination || flight.destination;
     flight.date = req.body.date || flight.date;
     await flight.save();
