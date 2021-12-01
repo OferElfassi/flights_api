@@ -2,7 +2,7 @@ const Flight = require("../models/flight-model");
 const HttpError = require("../util/http-error");
 const weatherApi = require("../util/weatherApi");
 const keys = require('../config/keys')
-
+const ObjectId = require('mongoose').Types.ObjectId;
 const getFlights = async (req, res, next) => {
   try {
     const flights = await Flight.find({}).select('-__v');
@@ -15,6 +15,7 @@ const getFlights = async (req, res, next) => {
 
 const getFlight = async (req, res, next) => {
   try {
+
     const flight = await Flight.findById(req.params.flightId);
     if (!flight) throw new HttpError("Can't find this flight.", 404);
     const weather = await weatherApi.getWeather(flight.destination, keys.WEATHER_API_KEY);
