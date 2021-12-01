@@ -1,8 +1,8 @@
 const Flight = require("../models/flight-model");
 const HttpError = require("../util/http-error");
-const weatherApi = require("../util/weatherApi");
-const keys = require('../config/keys')
-const ObjectId = require('mongoose').Types.ObjectId;
+const weatherApi = require("../util/weather-api");
+const keys = require('../config/keys');
+
 const getFlights = async (req, res, next) => {
   try {
     const flights = await Flight.find({}).select('-__v');
